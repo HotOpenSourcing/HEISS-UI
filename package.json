@@ -17,15 +17,15 @@
   },
   "scripts": {
     "predev": "node scripts/ensure-runtime-dependencies.mjs --dev",
-    "dev": "node scripts/dev.mjs",
+    "dev": "node init && node scripts/dev.mjs",
     "predev:demo": "node scripts/ensure-runtime-dependencies.mjs --dev",
-    "dev:demo": "concurrently \"vite --host 127.0.0.1 --port 5173\" \"node -e \\\"process.env.HEISS_DEMO='1';import('./server/index.js')\\\"\"",
+    "dev:demo": "node init && concurrently \"vite --host 127.0.0.1 --port 5173\" \"node -e \\\"process.env.HEISS_DEMO='1';import('./server/index.js')\\\"\"",
     "predev:setup-demo": "node scripts/ensure-runtime-dependencies.mjs --dev",
-    "dev:setup-demo": "concurrently \"vite --host 127.0.0.1 --port 5173\" \"node scripts/setup-demo.mjs\"",
+    "dev:setup-demo": "node init && concurrently \"vite --host 127.0.0.1 --port 5173\" \"node scripts/setup-demo.mjs\"",
     "predev:lan": "node scripts/ensure-runtime-dependencies.mjs --dev",
-    "dev:lan": "node scripts/dev.mjs --lan",
-    "build": "tsc -b && vite build",
-    "start": "node scripts/start.mjs",
+    "dev:lan": "node init && node scripts/dev.mjs --lan",
+    "build": "node init && tsc -b && vite build",
+    "start": "node init && node scripts/start.mjs",
     "preview": "vite preview --host 127.0.0.1 --port 5173",
     "site": "node scripts/site-preview.mjs",
     "test": "node --test server/*.test.js scripts/*.test.js",
@@ -35,7 +35,9 @@
   },
   "dependencies": {
     "busboy": "^1.6.0",
+    "dotenv": "^8.2.0",
     "express": "^5.2.1",
+    "node-fetch": "^3.3.2",
     "sharp": "^0.35.4"
   },
   "devDependencies": {
